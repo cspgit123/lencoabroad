@@ -45,6 +45,7 @@ app.post('/register', (req, res) => {
 
   // 👤 Member-specific file
   const memberFile = path.join(MEMBER_DIR, `${username}.xlsx`);
+  console.log('📁 Saving member file to:', memberFile); // 👈 add this
   const wb = xlsx.utils.book_new();
   const ws = xlsx.utils.json_to_sheet([data]);
   xlsx.utils.book_append_sheet(wb, ws, 'Data');
