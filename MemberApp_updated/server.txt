@@ -20,6 +20,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// 📝 Register
 app.post('/register', (req, res) => {
   const data = req.body;
   const username = data.username || 'unknown';
@@ -52,6 +53,7 @@ app.post('/register', (req, res) => {
   res.send('✅ Registration successful!');
 });
 
+// 🔐 Login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const memberFile = path.join(MEMBER_DIR, `${username}.xlsx`);
@@ -65,9 +67,11 @@ app.post('/login', (req, res) => {
 
   if (data.password === password)
     res.send(`✅ Welcome back, ${username}!`);
-  else res.status(401).send('❌ Incorrect password.');
+  else
+    res.status(401).send('❌ Incorrect password.');
 });
 
+// 🏠 Home
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
